@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Coberturas Cerraduras</title>
+
+<!-- ═══ PWA ═══ -->
+<link rel="manifest" href="./manifest.json">
+<meta name="theme-color" content="#CC0022">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="application-name" content="Cerraduras">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Cerraduras">
+<link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="120x120" href="./icons/icon-120.png">
+<link rel="apple-touch-icon" sizes="152x152" href="./icons/icon-152.png">
+<link rel="apple-touch-icon" sizes="167x167" href="./icons/icon-167.png">
+<link rel="apple-touch-icon" sizes="180x180" href="./icons/apple-touch-icon.png">
+<meta name="msapplication-TileImage" content="./icons/icon-144.png">
+<meta name="msapplication-TileColor" content="#CC0022">
+<link rel="icon" type="image/png" sizes="32x32" href="./icons/icon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./icons/icon-16.png">
+<link rel="shortcut icon" href="./favicon.ico">
+<meta name="description" content="Guía de coberturas de cerraduras para reparadores colaboradores">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --red:#CC0022; --red-dark:#990018;
+  --green:#1B7A45; --green-bg:#F0FAF4; --green-border:#A8DFC0;
+  --red-bg:#FFF0F2; --red-border:#FFAAB5;
+  --blue:#1565C0; --blue-bg:#EEF4FF; --blue-border:#BAD0F5;
+  --grey:#607080; --grey-bg:#F4F6F8; --grey-border:#C8D4DC;
+  --yellow-bg:#FFFBEA; --yellow-border:#F5C842; --yellow-text:#7A5800;
+  --white:#FFFFFF; --body-bg:#F8F9FB; --text:#1A2330; --text-light:#4A5568;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+body{font-family:'Nunito Sans',sans-serif;background:var(--body-bg);color:var(--text);min-height:100vh;max-width:480px;margin:0 auto;overflow-x:hidden;}
+.screen{display:none;}
+.screen.active{display:block;animation:fadeIn 0.2s ease;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(5px);}to{opacity:1;transform:none;}}
+
+/* HOME */
+.home-wrap{padding:18px 10px 28px;}
+.home-title-card{background:#fff;border:1.5px solid var(--red);border-left:4px solid var(--red);border-radius:14px;padding:22px 20px 18px;box-shadow:-4px 4px 0 rgba(204,0,34,0.14),0 1px 8px rgba(0,0,0,0.05);margin:0 -4px 18px;text-align:center;}
+.home-title-card h1{font-family:'Nunito',sans-serif;font-size:28px;font-weight:900;color:var(--red);letter-spacing:-0.4px;line-height:1.15;}
+.home-title-card p{font-size:15px;color:var(--text-light);margin-top:5px;font-weight:600;}
+.home-icon-wrap{display:flex;justify-content:center;margin-bottom:12px;}
+.home-icon-wrap img{width:70px;height:70px;border-radius:16px;object-fit:cover;}
+
+.menu-label{font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;color:var(--grey);text-transform:uppercase;letter-spacing:1px;margin-bottom:11px;}
+.menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.menu-card{background:var(--white);border-radius:14px;padding:18px 10px 14px;cursor:pointer;transition:all 0.18s;text-align:center;overflow:hidden;}
+.menu-card:active{transform:scale(0.955);}
+.card-green{background:#F4FAF8;border:1px solid #86C8A0;border-left:3px solid #1B7A45;}
+.card-green .menu-card-title{color:#1B7A45;}
+.card-red{background:#FFF0F2;border:1px solid #FFAAB5;border-left:3px solid #CC0022;}
+.card-red .menu-card-title{color:#CC0022;}
+.card-blue{background:#F5F9FF;border:1px solid #90B8E8;border-left:3px solid #1565C0;}
+.card-blue .menu-card-title{color:#1565C0;}
+.card-grey{background:#F4F6F8;border:1px solid #C8D4DC;border-left:3px solid #607080;}
+.card-grey .menu-card-title{color:#607080;}
+.menu-card-icon{display:flex;justify-content:center;margin-bottom:10px;}
+.menu-card-title{font-family:'Nunito',sans-serif;font-size:15px;font-weight:800;line-height:1.3;}
+
+/* AVISO */
+.aviso-card{margin-top:18px;background:var(--yellow-bg);border:1.5px solid var(--yellow-border);border-left:4px solid var(--yellow-border);border-radius:14px;padding:13px 15px;display:flex;gap:11px;align-items:flex-start;box-shadow:-4px 4px 0 rgba(245,200,66,0.20);}
+.aviso-icon{font-size:20px;flex-shrink:0;margin-top:1px;}
+.aviso-text{font-size:13px;color:var(--yellow-text);line-height:1.55;font-weight:600;}
+.aviso-text strong{display:block;font-size:13px;font-weight:800;margin-bottom:3px;letter-spacing:0.3px;}
+.aviso-text em{display:block;margin-top:5px;font-style:normal;font-weight:700;opacity:0.72;font-size:12px;}
+
+/* PAGE */
+.page-content{padding:14px 10px 36px;}
+.page-title-card{background:#fff;border:1.5px solid var(--red);border-left:4px solid var(--red);border-radius:14px;padding:14px 16px 13px;margin:0 -2px 14px;display:flex;align-items:center;gap:12px;box-shadow:-4px 4px 0 rgba(204,0,34,0.14),0 1px 8px rgba(0,0,0,0.05);}
+.page-title-card h1{font-family:'Nunito',sans-serif;font-size:22px;font-weight:900;color:var(--red);line-height:1.2;}
+.page-title-card p{font-size:14px;color:var(--text-light);margin-top:3px;}
+.ptc-icon{flex-shrink:0;}
+
+.ptc-back{width:34px;height:34px;border:1.5px solid rgba(204,0,34,0.25);border-left:3px solid var(--red);background:#FFF4F5;cursor:pointer;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.16s;box-shadow:-3px 3px 0 rgba(204,0,34,0.14);}
+.ptc-back:active{transform:scale(0.91);}
+.ptc-back svg{width:18px;height:18px;fill:none;stroke:var(--red);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;}
+
+/* SECTION CARDS */
+.section-card{border-radius:14px;margin-bottom:12px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,0.08);}
+.sc-header{padding:13px 16px;display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none;}
+.sc-header h2{font-family:'Nunito',sans-serif;font-size:17px;font-weight:800;flex:1;line-height:1.3;}
+.chevron{font-size:13px;opacity:0.75;transition:transform 0.22s;flex-shrink:0;}
+.section-card.open .chevron{transform:rotate(180deg);}
+.sc-body{display:none;padding:14px 16px;}
+.section-card.open .sc-body{display:block;}
+
+.card-cobertura{background:var(--green-bg);border:2px solid var(--green-border);}
+.card-cobertura .sc-header{background:var(--green);}
+.card-cobertura .sc-header h2,.card-cobertura .chevron{color:#fff;}
+.card-exclusion{background:var(--red-bg);border:2px solid var(--red-border);}
+.card-exclusion .sc-header{background:var(--red);}
+.card-exclusion .sc-header h2,.card-exclusion .chevron{color:#fff;}
+.card-info{background:var(--blue-bg);border:2px solid var(--blue-border);}
+.card-info .sc-header{background:var(--blue);}
+.card-info .sc-header h2,.card-info .chevron{color:#fff;}
+.card-neutral{background:var(--grey-bg);border:2px solid var(--grey-border);}
+.card-neutral .sc-header{background:#607080;}
+.card-neutral .sc-header h2,.card-neutral .chevron{color:#fff;}
+.card-grey737{background:#F5F5F5;border:2px solid #B0B0B0;}
+.card-grey737 .sc-header{background:#737373;}
+.card-grey737 .sc-header h2,.card-grey737 .chevron{color:#fff;}
+.card-red-section{background:#FFF0F2;border:2px solid #FFAAB5;}
+.card-red-section .sc-header{background:var(--red);}
+.card-red-section .sc-header h2,.card-red-section .chevron{color:#fff;}
+
+/* LISTS */
+.item-list{list-style:none;}
+.item-list li{padding:9px 0;border-bottom:1px solid rgba(0,0,0,0.07);font-size:15.5px;line-height:1.65;color:var(--text);display:flex;gap:9px;align-items:flex-start;}
+.item-list li:last-child{border-bottom:none;}
+.li-icon{flex-shrink:0;font-size:16px;margin-top:1px;}
+.sub-list{list-style:none;margin-top:8px;padding-left:4px;}
+.sub-list li{padding:5px 0;display:flex;gap:8px;align-items:flex-start;font-size:15px;border-bottom:none;}
+.sub-arrow{color:#1B7A45;font-weight:700;flex-shrink:0;}
+.sub-arrow-red{color:#CC0022;font-weight:700;flex-shrink:0;}
+
+/* BOXES */
+.warn-box{background:#FFF8E1;border:1.5px solid #FFD54F;border-radius:12px;padding:11px 13px;margin-bottom:12px;font-size:15.5px;color:#5D4037;line-height:1.6;display:flex;gap:9px;align-items:flex-start;}
+.info-box{background:#EBF5FB;border:1.5px solid #85C1E9;border-radius:12px;padding:11px 13px;margin-bottom:12px;font-size:15.5px;color:#154360;line-height:1.6;display:flex;gap:9px;align-items:flex-start;}
+.green-box{background:var(--green-bg);border:1.5px solid var(--green-border);border-radius:12px;padding:11px 13px;margin-bottom:12px;font-size:15.5px;color:#14532D;line-height:1.6;display:flex;gap:9px;align-items:flex-start;}
+.wi{font-size:19px;flex-shrink:0;}
+
+/* STEP CARDS */
+.step-card{background:#fff;border-radius:12px;padding:13px 14px;margin-bottom:10px;display:flex;gap:12px;align-items:flex-start;box-shadow:0 1px 5px rgba(0,0,0,0.07);}
+.step-num{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Nunito',sans-serif;font-size:12px;font-weight:900;flex-shrink:0;color:#fff;}
+.step-num.green{background:var(--green);}
+.step-num.blue{background:var(--blue);}
+.step-num.red{background:var(--red);}
+.step-content h3{font-family:'Nunito',sans-serif;font-size:16px;font-weight:800;margin-bottom:3px;}
+.step-content p{font-size:15.5px;color:var(--text-light);line-height:1.6;}
+
+/* POLIZA ITEMS */
+.poliza-item{background:#fff;border-radius:12px;padding:13px 14px;margin-bottom:10px;border-left:5px solid var(--green);box-shadow:0 1px 5px rgba(0,0,0,0.07);}
+.poliza-item.info{border-left-color:var(--blue);}
+.poliza-item.red{border-left-color:var(--red);}
+.poliza-item h3{font-family:'Nunito',sans-serif;font-size:16px;font-weight:800;margin-bottom:5px;}
+.poliza-item p{font-size:15.5px;color:var(--text-light);line-height:1.6;}
+
+/* RED NOTICE */
+.red-notice{background:#fff;border:1.5px solid var(--red);border-left:4px solid var(--red);border-radius:14px;padding:13px 15px;display:flex;gap:11px;align-items:flex-start;box-shadow:-4px 4px 0 rgba(204,0,34,0.14);margin-top:14px;}
+.red-notice-text{font-size:15px;color:var(--text);line-height:1.6;font-weight:600;}
+.red-notice-text strong{color:var(--red);}
+
+/* SUBSECTION LABEL */
+.subsec-label{font-family:'Nunito',sans-serif;font-size:12.5px;font-weight:800;color:var(--grey);text-transform:uppercase;letter-spacing:1px;margin:14px 0 8px;padding-left:2px;}
+
+/* TABLE */
+.cov-table{width:100%;border-collapse:collapse;font-size:14px;margin-bottom:10px;}
+.cov-table th{background:var(--red);color:#fff;padding:8px 10px;font-family:'Nunito',sans-serif;font-weight:800;text-align:left;}
+.cov-table td{padding:8px 10px;border-bottom:1px solid rgba(0,0,0,0.07);vertical-align:top;line-height:1.5;}
+.cov-table tr:last-child td{border-bottom:none;}
+.cov-table tr:nth-child(even) td{background:rgba(0,0,0,0.02);}
+.badge-si{background:#E8F8EE;color:#1B7A45;border-radius:20px;padding:2px 10px;font-weight:800;font-size:13px;white-space:nowrap;}
+.badge-no{background:#FFE8EB;color:#CC0022;border-radius:20px;padding:2px 10px;font-weight:800;font-size:13px;white-space:nowrap;}
+.badge-cond{background:#FFF8E1;color:#7A5800;border-radius:20px;padding:2px 10px;font-weight:800;font-size:13px;white-space:nowrap;}
+
+::-webkit-scrollbar{display:none;}
+*{scrollbar-width:none;}
+</style>
+</head>
+<body>
+
+<!-- HOME -->
+<div class="screen active" id="screen-home">
+  <div class="home-wrap">
+    <div class="home-title-card">
+      
+      <h1>Coberturas Cerraduras</h1>
+      <p>Guía para reparadores colaboradores</p>
+    </div>
+
+    <div class="menu-label">Selecciona una sección</div>
+
+    <div class="menu-grid">
+      <div class="menu-card card-green" onclick="goTo('screen-quesecu')">
+        <div class="menu-card-icon"><span style="font-size:36px;line-height:1">🛡️</span></div>
+        <div class="menu-card-title">¿Qué se cubre?</div>
+      </div>
+      <div class="menu-card card-blue" onclick="goTo('screen-quepuertas')">
+        <div class="menu-card-icon"><span style="font-size:36px;line-height:1">🚪</span></div>
+        <div class="menu-card-title">¿Qué puertas?</div>
+      </div>
+      <div class="menu-card card-grey" onclick="goTo('screen-danos')">
+        <div class="menu-card-icon"><span style="font-size:36px;line-height:1">🔍</span></div>
+        <div class="menu-card-title">Daños por apertura</div>
+      </div>
+      <div class="menu-card card-red" onclick="goTo('screen-exclusiones')">
+        <div class="menu-card-icon"><span style="font-size:36px;line-height:1">🚫</span></div>
+        <div class="menu-card-title">Exclusiones</div>
+      </div>
+      <div class="menu-card card-red" onclick="goTo('screen-aperturas')">
+        <div class="menu-card-icon"><span style="font-size:36px;line-height:1">🔓</span></div>
+        <div class="menu-card-title">Aperturas</div>
+      </div>
+      <div class="menu-card card-red" onclick="goTo('screen-asistencias')">
+        <div class="menu-card-icon"><span style="font-size:36px;line-height:1">🧰</span></div>
+        <div class="menu-card-title">Asistencias</div>
+      </div>
+    </div>
+
+    <div style="display:flex;justify-content:flex-end;margin-top:18px;margin-bottom:10px;">
+      <button onclick="document.getElementById('info-modal').style.display='flex'"
+        style="background:#1A2330;color:#fff;border:none;border-radius:20px;padding:6px 18px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;cursor:pointer;letter-spacing:0.3px;box-shadow:0 2px 8px rgba(0,0,0,0.18);">
+        Info
+      </button>
+    </div>
+
+    <div class="aviso-card">
+      <span class="aviso-icon">⚠️</span>
+      <div class="aviso-text">
+        <strong>AVISO LEGAL</strong>
+        Herramienta de consulta con fines informativos, de uso exclusivo para reparadores colaboradores. No recoge datos ni interactúa con sistemas corporativos. No sustituye los canales o herramientas oficiales. De uso voluntario.
+        <em>Ante cualquier duda, consulta siempre con el departamento técnico.</em>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- MODAL INFO -->
+<div id="info-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:999;align-items:center;justify-content:center;padding:20px;" onclick="if(event.target===this)this.style.display='none'">
+  <div style="background:#fff;border-radius:18px;max-width:400px;width:100%;box-shadow:0 8px 32px rgba(0,0,0,0.22);overflow:hidden;">
+    <div style="background:#CC0022;padding:16px 20px 14px;display:flex;align-items:center;justify-content:space-between;">
+      <span style="font-family:'Nunito',sans-serif;font-size:16px;font-weight:800;color:#fff;">📱 Instalar la app</span>
+      <button onclick="document.getElementById('info-modal').style.display='none'"
+        style="background:rgba(255,255,255,0.2);border:none;color:#fff;width:28px;height:28px;border-radius:50%;font-size:16px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;">✕</button>
+    </div>
+    <div style="padding:18px 20px 20px;">
+      <div style="margin-bottom:14px;display:flex;gap:13px;align-items:flex-start;">
+        <span style="font-size:22px;flex-shrink:0;">🤖</span>
+        <div><div style="font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;color:#1A2330;margin-bottom:3px;">Android (Chrome)</div>
+        <div style="font-size:13px;color:#4A5568;line-height:1.5;">Abre la URL → menú ⋮ → <em>"Añadir a pantalla de inicio"</em></div></div>
+      </div>
+      <div style="margin-bottom:14px;display:flex;gap:13px;align-items:flex-start;">
+        <span style="font-size:22px;flex-shrink:0;"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16.8 11.6c0-2.7 2.2-4 2.3-4.1-1.3-1.8-3.2-2.1-3.9-2.1-1.7-.2-3.2 1-4.1 1-0.8 0-2.1-1-3.5-0.9-1.8 0-3.4 1-4.3 2.6-1.8 3.2-0.5 7.9 1.3 10.5 0.9 1.3 1.9 2.7 3.3 2.7 1.3 0 1.8-0.8 3.4-0.8 1.6 0 2 0.8 3.4 0.8 1.4 0 2.3-1.3 3.2-2.6 1-1.4 1.4-2.8 1.4-2.9-0.1 0-2.5-1-2.5-3.2z" fill="#C0C0C0"/><path d="M14.1 4.3c0.7-0.9 1.2-2.1 1.1-3.3-1 0-2.3 0.7-3 1.6-0.7 0.8-1.3 2-1.1 3.2 1.1 0.1 2.3-0.6 3-1.5z" fill="#C0C0C0"/></svg></span>
+        <div><div style="font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;color:#1A2330;margin-bottom:3px;">iOS (Safari)</div>
+        <div style="font-size:13px;color:#4A5568;line-height:1.5;">Abre la URL → botón compartir □↑ → <em>"Añadir a pantalla de inicio"</em></div></div>
+      </div>
+      <div style="display:flex;gap:13px;align-items:flex-start;">
+        <span style="font-size:22px;flex-shrink:0;">🖥️</span>
+        <div><div style="font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;color:#1A2330;margin-bottom:3px;">PC (Chrome / Edge)</div>
+        <div style="font-size:13px;color:#4A5568;line-height:1.5;">Abre la URL → icono ⊕ en la barra de direcciones → <em>"Instalar"</em></div></div>
+      </div>
+      <div style="margin-top:16px;padding-top:13px;border-top:1px solid #E8ECEF;font-size:13px;color:#607080;text-align:center;font-style:italic;">
+        💡 La app funciona sin conexión después de la primera carga
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- QUÉ SE CUBRE -->
+<div class="screen" id="screen-quesecu">
+  <div class="page-content">
+    <div class="page-title-card" style="border-color:#1B7A45;border-left-color:#1B7A45;box-shadow:-4px 4px 0 rgba(27,122,69,0.14),0 1px 8px rgba(0,0,0,0.05);">
+      <button class="ptc-back" onclick="goBack()" style="border-color:rgba(27,122,69,0.25);border-left-color:#1B7A45;background:#F0FAF4;box-shadow:-3px 3px 0 rgba(27,122,69,0.14);">
+        <svg viewBox="0 0 24 24" style="stroke:#1B7A45"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="ptc-icon"><span style="font-size:32px;line-height:1">🛡️</span></div>
+      <div><h1 style="color:#1B7A45">¿Qué se cubre?</h1><p>Coberturas según la situación</p></div>
+    </div>
+
+    <!-- Robo -->
+    <div class="section-card card-cobertura open" id="sc-cov-1">
+      <div class="sc-header" onclick="toggleCard('sc-cov-1')">
+        <span style="font-size:17px">🔐</span><h2>Por robo</h2><span class="chevron">▼</span>
+      </div>
+      <div class="sc-body">
+        <ul class="item-list">
+          <li><span class="li-icon">✅</span><span>Cambio de cilindro y <strong>sustitución de llaves</strong>.</span></li>
+        </ul>
+        <div class="subsec-label">💰 Límite de importe</div>
+        <div class="poliza-item"><h3>🏠 Hogar</h3><p>Sin límite de importe.</p></div>
+        <div class="poliza-item"><h3>🏢 Comunidades y Comercios</h3><p>Hasta <strong>600 € IVA incluido</strong>.</p></div>
+        <div class="poliza-item"><h3>🏭 Empresas</h3><p>Hasta <strong>900 € IVA incluido</strong>.</p></div>
+        <div class="subsec-label">🏷️ VERTI</div>
+        <div class="poliza-item" style="border-left-color:#737373;">
+          <ul class="item-list" style="margin:0;">
+            <li style="padding:7px 0;"><span class="li-icon" style="font-weight:900;color:#CC0022;min-width:22px;">S</span><span>Sin cobertura.</span></li>
+            <li style="padding:7px 0;"><span class="li-icon" style="font-weight:900;color:#F57F17;min-width:22px;">M</span><span>Excluido si <strong>no hay daños directos</strong> por robo. Con daños: cubierto hasta <strong>1.500 €</strong>.</span></li>
+            <li style="padding:7px 0;border-bottom:none;"><span class="li-icon" style="font-weight:900;color:#1B7A45;min-width:22px;">L</span><span>Cubierto <strong>con o sin daños</strong> hasta <strong>1.500 €</strong>.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hurto/Extravío -->
+    <div class="section-card card-cobertura" id="sc-cov-2">
+      <div class="sc-header" onclick="toggleCard('sc-cov-2')">
+        <span style="font-size:17px">🗝️</span><h2>Por hurto y extravío de llaves</h2><span class="chevron">▼</span>
+      </div>
+      <div class="sc-body">
+        <ul class="item-list">
+          <li><span class="li-icon">✅</span><span>Apertura y cambio de cilindro.</span></li>
+          <li><span class="li-icon">💰</span><span>Hasta <strong>600 € IVA incluido</strong>.</span></li>
+        </ul>
+        <div class="subsec-label">🏷️ VERTI</div>
+        <div class="poliza-item" style="border-left-color:#737373;">
+          <ul class="item-list" style="margin:0;">
+            <li style="padding:7px 0;"><span class="li-icon" style="font-weight:900;color:#CC0022;min-width:22px;">S</span><span>Sin cobertura (ni hurto ni extravío).</span></li>
+            <li style="padding:7px 0;"><span class="li-icon" style="font-weight:900;color:#F57F17;min-width:22px;">M</span><span><strong>Extravío:</strong> Excluido. <strong>Hurto:</strong> Solo con daños directos → hasta <strong>1.500 €</strong>.</span></li>
+            <li style="padding:7px 0;border-bottom:none;"><span class="li-icon" style="font-weight:900;color:#1B7A45;min-width:22px;">L</span><span><strong>Hurto y extravío</strong> cubiertos hasta <strong>1.500 €</strong>.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Asistencia urgente -->
+    <div class="section-card card-red-section" id="sc-cov-3">
+      <div class="sc-header" onclick="toggleCard('sc-cov-3')">
+        <span style="font-size:17px">🚨</span><h2>Por Asistencia URGENTE</h2><span class="chevron">▼</span>
+      </div>
+      <div class="sc-body">
+        <div style="font-family:'Nunito',sans-serif;font-size:16px;font-weight:900;color:#CC0022;margin:0 0 10px;text-transform:uppercase;letter-spacing:0.3px;">🚪 Bloqueo de puertas de acceso</div>
+        <ul class="item-list">
+          <li><span class="li-icon">✅</span><span>Solo mano de obra de <strong>apertura de la puerta</strong> para dar acceso a la vivienda.</span></li>
+          <li><span class="li-icon">⏱️</span><span>Hasta <strong>3 horas de mano de obra</strong> + Guardia y desplazamiento (si procede).</span></li>
+          <li><span class="li-icon">❌</span><span>Queda <strong>totalmente excluida</strong> la sustitución de cilindro y cerradura, se hayan dañado durante la apertura o no.</span></li>
+        </ul>
+        <div style="font-family:'Nunito',sans-serif;font-size:16px;font-weight:900;color:#CC0022;margin:14px 0 10px;text-transform:uppercase;letter-spacing:0.3px;">🧍 Salvamento de personas en interior</div>
+        <ul class="item-list">
+          <li><span class="li-icon">✅</span><span>Cubre la <strong>Apertura</strong> y los <strong>daños derivados del salvamento</strong>.</span></li>
+        </ul>
+        <div class="subsec-label">💰 Límites</div>
+        <div class="poliza-item"><h3>🏠 Hogar y comunidades</h3><p>Hasta <strong>600 € IVA incluido</strong>.</p></div>
+        <div class="poliza-item"><h3>🏪 Comercios y empresas</h3><p>Hasta <strong>605 €</strong>.</p></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- QUÉ PUERTAS -->
+<div class="screen" id="screen-quepuertas">
+  <div class="page-content">
+    <div class="page-title-card" style="border-color:#1565C0;border-left-color:#1565C0;box-shadow:-4px 4px 0 rgba(21,101,192,0.14),0 1px 8px rgba(0,0,0,0.05);">
+      <button class="ptc-back" onclick="goBack()" style="border-color:rgba(21,101,192,0.25);border-left-color:#1565C0;background:#EEF4FF;box-shadow:-3px 3px 0 rgba(21,101,192,0.14);">
+        <svg viewBox="0 0 24 24" style="stroke:#1565C0"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="ptc-icon"><span style="font-size:32px;line-height:1">🚪</span></div>
+      <div><h1 style="color:#1565C0">¿Qué puertas?</h1><p>Puertas cubiertas por modalidad</p></div>
+    </div>
+
+    <div class="section-card card-grey737 open" id="sc-puertas-1">
+      <div class="sc-header" onclick="toggleCard('sc-puertas-1')">
+        <span style="font-size:17px">🏡</span><h2>Hogar</h2><span class="chevron">▼</span>
+      </div>
+      <div class="sc-body">
+        <ul class="item-list">
+          <li><span class="li-icon">✅</span><span>Acceso a la vivienda: <strong>principal y secundaria</strong>.</span></li>
+          <li><span class="li-icon">✅</span><span><strong>Trastero</strong>.</span></li>
+          <li><span class="li-icon">✅</span><span><strong>Garaje privado</strong> (incluido mando).</span></li>
+          <li><span class="li-icon">✅</span><span><strong>Portallón de la finca</strong>.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section-card card-grey737" id="sc-puertas-2">
+      <div class="sc-header" onclick="toggleCard('sc-puertas-2')">
+        <span style="font-size:17px">🏢</span><h2>Comunidades</h2><span class="chevron">▼</span>
+      </div>
+      <div class="sc-body">
+        <div class="subsec-label">Por robo</div>
+        <ul class="item-list">
+          <li><span class="li-icon">✅</span><span>Acceso al edificio igual que Hogar, incluso <strong>puertas de viviendas privadas</strong>.</span></li>
+        </ul>
+        <div class="subsec-label">Asistencia Urgente</div>
+        <ul class="item-list">
+          <li><span class="li-icon">✅</span><span>Solo <strong>puertas de acceso al edificio</strong>.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section-card card-grey737" id="sc-puertas-3">
+      <div class="sc-header" onclick="toggleCard('sc-puertas-3')">
+        <span style="font-size:17px">🏪</span><h2>Comercios y Empresas</h2><span class="chevron">▼</span>
+      </div>
+      <div class="sc-body">
+        <ul class="item-list">
+          <li><span class="li-icon">✅</span><span>Únicamente las <strong>puertas de acceso al establecimiento</strong>.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section-card card-grey737" id="sc-puertas-4">
+      <div class="sc-header" onclick="toggleCard('sc-puertas-4')">
+        <span style="font-size:17px">🔑</span><h2>Copias de llaves a entregar</h2><span class="chevron">▼</span>
+      </div>
+      <div class="sc-body">
+        <div class="poliza-item info"><h3>🏠 Hogar, Comercios, Empresas</h3><p>Las que <strong>trae de origen</strong> la cerradura.</p></div>
+        <div class="poliza-item info"><h3>🏢 Comunidades</h3><p>Llaves necesarias hasta un límite de <strong>600 € IVA incluido</strong>.</p></div>
+      </div>
+    </div>
+
+    <div class="section-card card-exclusion" id="sc-puertas-5">
+      <div class="sc-header" onclick="toggleCard('sc-puertas-5')">
+        <span style="font-size:17px">🚫</span><h2>Puertas que NO se cubren</h2><span class="chevron">▼</span>
+      </div>
+      <div class="sc-body">
+        <ul class="item-list">
+          <li><span class="li-icon">❌</span><span>Cerraduras de <strong>buzones</strong>.</span></li>
+          <li><span class="li-icon">❌</span><span>Toda estancia que <strong>no sea de acceso</strong> a la vivienda, comunidad o comercio: puertas interiores, cuarto de calderas, cuarto de contadores, etc.</span></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- DAÑOS POR APERTURA -->
+<div class="screen" id="screen-danos">
+  <div class="page-content">
+    <div class="page-title-card" style="border-color:#607080;border-left-color:#607080;box-shadow:-4px 4px 0 rgba(96,112,128,0.14),0 1px 8px rgba(0,0,0,0.05);">
+      <button class="ptc-back" onclick="goBack()" style="border-color:rgba(96,112,128,0.25);border-left-color:#607080;background:#F4F6F8;box-shadow:-3px 3px 0 rgba(96,112,128,0.14);">
+        <svg viewBox="0 0 24 24" style="stroke:#607080"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="ptc-icon"><span style="font-size:32px;line-height:1">🔍</span></div>
+      <div><h1 style="color:#607080">Daños por apertura</h1><p>Cilindros o cerraduras dañadas</p></div>
+    </div>
+
+    <div class="section-card card-cobertura open" id="sc-danos-1">
+      <div class="sc-header" onclick="toggleCard('sc-danos-1')">
+        <span style="font-size:17px">✅</span><h2>Robo, extravío o salvamento</h2><span class="chevron">▼</span>
+      </div>
+      <div class="sc-body">
+        <ul class="item-list">
+          <li><span class="li-icon">✅</span><span>Si se <strong>daña el cilindro o la cerradura</strong> al abrir la puerta → se <strong>sustituye la pieza dañada</strong>.</span></li>
+          <li><span class="li-icon">⚠️</span><span>Si el daño es por <strong>desgaste o uso</strong> → ofrecemos <strong style="color:#CC0022">ASISTENCIA</strong>.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section-card card-exclusion" id="sc-danos-2">
+      <div class="sc-header" onclick="toggleCard('sc-danos-2')">
+        <span style="font-size:17px">🚫</span><h2>Bloqueo de puerta</h2><span class="chevron">▼</span>
+      </div>
+      <div class="sc-body">
+        <ul class="item-list">
+          <li><span class="li-icon">✅</span><span>Solo tiene cobertura la <strong>apertura de la puerta</strong>.</span></li>
+          <li><span class="li-icon">📢</span><span>Informamos previamente que el <strong>cambio de piezas no está cubierto</strong> y ofrecemos <strong style="color:#CC0022">ASISTENCIA</strong>.</span></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- EXCLUSIONES -->
+<div class="screen" id="screen-exclusiones">
+  <div class="page-content">
+    <div class="page-title-card">
+      <button class="ptc-back" onclick="goBack()"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+      <div class="ptc-icon"><span style="font-size:32px;line-height:1">🚫</span></div>
+      <div><h1>Exclusiones</h1><p>Casos sin cobertura en la póliza</p></div>
+    </div>
+
+    <div class="section-card card-neutral open" id="sc-excl-0">
+      <div class="sc-header" onclick="toggleCard('sc-excl-0')">
+        <span style="font-size:17px">🔍</span><h2>Comprobaciones básicas</h2><span class="chevron">▼</span>
+      </div>
+      <div class="sc-body">
+        <ul class="item-list">
+          <li><span class="li-icon">✔️</span><span>Verificar si el daño es <strong>compatible con la descripción</strong> del servicio.</span></li>
+          <li><span class="li-icon">✔️</span><span>Que se trate de un <strong>hecho accidental</strong>, aislado, imprevisto e involuntario.</span></li>
+          <li><span class="li-icon">✔️</span><span>Que la avería <strong>no sea por uso o desgaste mecánico</strong>: puerta descolgada, dificultad de girar llaves, etc.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section-card card-exclusion" id="sc-excl-1">
+      <div class="sc-header" onclick="toggleCard('sc-excl-1')">
+        <span style="font-size:17px">🚫</span><h2>Exclusiones principales</h2><span class="chevron">▼</span>
+      </div>
+      <div class="sc-body">
+        <ul class="item-list">
+          <li><span class="li-icon">❌</span><span>Falta de mantenimiento o deterioro: puerta descolgada, <strong>óxido</strong>, maneta descolgada, pomo partido, etc.</span></li>
+          <li><span class="li-icon">❌</span><span>Desgaste mecánico de la cerradura: dificultad al girar, atascamiento, óxido, <strong>mecanismo flojo</strong>.</span></li>
+          <li><span class="li-icon">❌</span><span>Daños por otra causa que <strong>no sea acto vandálico</strong>, que falte la cerradura o el resbalón, etc.</span></li>
+          <li><span class="li-icon">❌</span><span>Puertas de paso: pérdida de llaves de <strong>puertas interiores</strong>, bloqueo de puerta de paso.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="red-notice">
+      <span style="font-size:19px;flex-shrink:0">🧰</span>
+      <div class="red-notice-text">Si el trabajo no está cubierto, <strong style="color:var(--red)">ofrece siempre Asistencia</strong>. Solicítalo desde <strong style="color:var(--red)">Appcol por IPS</strong>. El servicio lo paga el cliente.</div>
+    </div>
+  </div>
+</div>
+
+<!-- APERTURAS -->
+<div class="screen" id="screen-aperturas">
+  <div class="page-content">
+    <div class="page-title-card">
+      <button class="ptc-back" onclick="goBack()"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+      <div class="ptc-icon"><span style="font-size:32px;line-height:1">🔓</span></div>
+      <div><h1>Aperturas</h1><p>Procedimiento para apertura de puertas</p></div>
+    </div>
+
+    <div class="warn-box">
+      <span class="wi">⚠️</span>
+      <div><strong>Antes de abrir la puerta:</strong> Verifica siempre si la avería viene por desgaste o uso (excluido) o por el siniestro.</div>
+    </div>
+
+    <div class="section-card card-cobertura open" id="sc-ap-1">
+      <div class="sc-header" onclick="toggleCard('sc-ap-1')">
+        <span style="font-size:17px">✅</span><h2>Cliente CON DNI coincidente</h2><span class="chevron">▼</span>
+      </div>
+      <div class="sc-body">
+        <div class="step-card">
+          <div class="step-num green">1</div>
+          <div class="step-content"><h3>Verificar identidad</h3><p>¿El cliente tiene DNI y coincide con los datos de la póliza?</p></div>
+        </div>
+        <div class="step-card">
+          <div class="step-num green">2</div>
+          <div class="step-content"><h3>Anotar en el parte</h3><p>Anota <strong>Nombre, Apellidos y Nº DNI</strong> en el parte de trabajo.</p></div>
+        </div>
+        <div class="step-card">
+          <div class="step-num green">3</div>
+          <div class="step-content"><h3>Procede con la apertura</h3><p>Puedes realizar la apertura sin inconveniente.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-card card-exclusion" id="sc-ap-2">
+      <div class="sc-header" onclick="toggleCard('sc-ap-2')">
+        <span style="font-size:17px">🚫</span><h2>Cliente SIN DNI o sin coincidencia</h2><span class="chevron">▼</span>
+      </div>
+      <div class="sc-body">
+        <div class="warn-box" style="margin-bottom:10px;">
+          <span class="wi">⚠️</span>
+          <div>Documentación dentro, sin documentación, inquilino, familiar, etc.</div>
+        </div>
+        <div class="step-card">
+          <div class="step-num red">1</div>
+          <div class="step-content"><h3>🚫 NO ABRAS LA PUERTA AÚN</h3><p>Espera antes de actuar.</p></div>
+        </div>
+        <div class="step-card">
+          <div class="step-num red">2</div>
+          <div class="step-content"><h3>📞 Llama a Batería</h3><p>Solicita instrucciones. Ellos contactarán con el asegurado.</p></div>
+        </div>
+        <div class="step-card">
+          <div class="step-num red">3</div>
+          <div class="step-content"><h3>Si se autoriza la apertura</h3><p>Anota en el parte: lo ocurrido, quién te atendió, su relación con el asegurado y que llamaste a batería. <strong>La firma es indispensable.</strong></p></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ASISTENCIAS -->
+<div class="screen" id="screen-asistencias">
+  <div class="page-content">
+    <div class="page-title-card">
+      <button class="ptc-back" onclick="goBack()"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+      <div class="ptc-icon"><span style="font-size:32px;line-height:1">🧰</span></div>
+      <div><h1>Asistencias</h1><p>Cuándo y cómo ofrecer asistencia</p></div>
+    </div>
+
+    <div class="section-card card-red-section open" id="sc-as-1">
+      <div class="sc-header" onclick="toggleCard('sc-as-1')">
+        <span style="font-size:17px">🧰</span><h2>¿Cuándo ofrecer asistencia?</h2><span class="chevron">▼</span>
+      </div>
+      <div class="sc-body">
+        <ul class="item-list">
+          <li><span class="li-icon">🔧</span><span>Si el trabajo <strong>no está cubierto</strong> por la póliza.</span></li>
+          <li><span class="li-icon">🔧</span><span>Si se puede <strong>mejorar la seguridad</strong> o los materiales existentes.</span></li>
+          <li><span class="li-icon">🔧</span><span>Si el daño es por <strong>desgaste o uso</strong> (excluido del servicio gratuito).</span></li>
+          <li><span class="li-icon">🔧</span><span>Si el cilindro o cerradura dañada en bloqueo <strong>necesita sustitución</strong>.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section-card card-neutral" id="sc-as-2">
+      <div class="sc-header" onclick="toggleCard('sc-as-2')">
+        <span style="font-size:17px">📋</span><h2>¿Cómo solicitarla?</h2><span class="chevron">▼</span>
+      </div>
+      <div class="sc-body">
+        <div class="step-card">
+          <div class="step-num blue">1</div>
+          <div class="step-content"><h3>Ofrecer al cliente</h3><p>Si el cliente acepta, explícale que el servicio <strong>lo paga el cliente</strong>.</p></div>
+        </div>
+        <div class="step-card">
+          <div class="step-num blue" style="font-size:10px;width:32px;height:32px;">App</div>
+          <div class="step-content">
+            <h3>Desde Appcol</h3>
+            <p>Opción <strong>IPS</strong> ➜ Abrir expediente de <strong>Asistencia con servicio para mí</strong>.</p>
+          </div>
+        </div>
+        <div class="step-card">
+          <div class="step-num blue" style="font-size:10px;width:32px;height:32px;">Info</div>
+          <div class="step-content">
+            <h3>Por Infocol</h3>
+            <p>¿Existe <strong>intervención posterior</strong> de otro profesional? ➜ Abrir expediente de <strong>Asistencia con servicio para mí</strong>.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="red-notice">
+      <span style="font-size:19px;flex-shrink:0">💡</span>
+      <div class="red-notice-text"><strong style="color:var(--red)">Recuerda:</strong> Siempre que el trabajo no esté cubierto, es una oportunidad para ofrecer asistencia y mejorar la experiencia del cliente.</div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const stack = [];
+let currentScreen = 'screen-home';
+
+function goTo(id) {
+  stack.push(currentScreen);
+  showScreen(id);
+}
+
+function goBack() {
+  if (!stack.length) return;
+  showScreen(stack.pop());
+}
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  const el = document.getElementById(id);
+  if (el) el.classList.add('active');
+  currentScreen = id;
+  window.scrollTo(0, 0);
+}
+
+function toggleCard(id) {
+  const card = document.getElementById(id);
+  if (card) card.classList.toggle('open');
+}
+
+showScreen('screen-home');
+</script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('./sw.js')
+      .then(reg => console.log('[SW] Registrado:', reg.scope))
+      .catch(err => console.warn('[SW] Error:', err));
+  });
+}
+</script>
+</body>
+</html>
